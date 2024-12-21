@@ -11,6 +11,7 @@ pub mod runtime;
 
 pub mod gx;
 pub mod gx2d;
+pub mod input;
 
 use core::arch::global_asm;
 
