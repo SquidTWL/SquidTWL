@@ -26,8 +26,3 @@ extern "C" fn main() {
         wait_for_interrupts(InterruptBits::LCD_VERTICAL_BLANK).unwrap();
     }
 }
-
-#[panic_handler]
-fn _handle(_: &core::panic::PanicInfo<'_>) -> ! {
-    loop {}
-}

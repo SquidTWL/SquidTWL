@@ -26,8 +26,10 @@ workspace = true
 [features]
 # The default IRQ handler, which uses an IRQ table.
 irq = []
+# A default panic handler, which causes an ARM breakpoint.
+default_panic_handler = []
 
 # Support for ``embedded_graphics`` via the framebuffer.
 embedded_graphics = ["dep:embedded-graphics"]
 
-default = ["irq"]
+default = ["irq", "default_panic_handler"]

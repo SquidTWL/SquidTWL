@@ -7,6 +7,7 @@
 pub mod raw;
 pub mod interrupt;
 pub mod critical;
+pub mod runtime;
 
 pub mod gx;
 pub mod gx2d;
