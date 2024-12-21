@@ -31,7 +31,7 @@ impl ProcessorMode {
             0b10111 => ProcessorMode::Abort,
             0b11011 => ProcessorMode::Undefined,
             0b11111 => ProcessorMode::System,
-            _ => unreachable!()
+            _ => panic!("unexpected mode! pass me an actual cpsr value!")
         }
     }
 }
@@ -62,7 +62,7 @@ impl CurrentProgramState {
     }
 
     pub fn mode(&self) -> ProcessorMode {
-        return ProcessorMode::from_cpsr_bits(self.0 & 0b1111);
+        return ProcessorMode::from_cpsr_bits(self.0 & 0b11111);
     }
 }
 
