@@ -57,10 +57,11 @@ setup_coprocessor:
     ldr r0, =(0x02000000 | 0x2b)
     mcr p15, 0, r0, c6, c1, 0
     
-    // Protection region 2: 0x027e0000, 128KiB (what?)
-    // GBATEK: Region 2 and 7 are not understood?
-    // Not going to set this. All zeroes to disable memory protection.
-    mov r0, 0
+    // Protection region 2: 0x027FF00, 4KiB.
+    // This is used by the BIOS and by the ARM7 to send data to the ARM9 without using FIFO.
+    // Due to how the mirroring works, this is written to *underneath* the DTCM and isn't accessible
+    // via main memory, but is accessible via the mirror up here.
+    ldr r0, =(0x027FF00 | 0x17)
     mcr p15, 0, r0, c6, c2, 0
 
     // Protection region 3: 0x08000000, 128MiB 
@@ -85,20 +86,11 @@ setup_coprocessor:
     ldr r0, =(0xFFFF0000 | 0x1d)
     mcr p15, 0, r0, c6, c6, 0
 
-    // Protection region 7: 0x027FF000, 4KiB.
-    // GBATEK says "shared work", which is more evidence in the pile that it's based off of leaked
-    // SDKs. The actual shared WRAM area is at the 0x03... addresses.
-    // So... let's set it there.
     // Protection region 7: 0x037F8000, 32KiB. 
+    // This is shared WRAM. 
     ldr r0, =__shram_region_start
     orr r0, r0, #0x1d
     mcr p15, 0, r0, c6, c7, 0 
-
-    // Protection region 2: 0x027FF00, 4KiB.
-    // This is BIOS ram, see NDS BIOS RAM usage in GBATEK. Only realised this when looking through
-    // addresses. 
-    ldr r0, =(0x027FF00 | 0x17)
-    mcr p15, 0, r0, c6, c2, 0
 
     // == Tightly Coupled Memory == //
     // C9, C1 controls the TCM Region. 
