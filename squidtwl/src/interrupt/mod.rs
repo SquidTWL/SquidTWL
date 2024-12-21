@@ -118,8 +118,11 @@ pub struct NoBitsError;
 
 /**
  * Waits for a set of interrupts specified by the provided mask.
+ * 
+ * This operation is inherently unsafe, as some interrupt sources require setting flags in their
+ * own registers to avoid locking the processor up.
  */
-pub fn wait_for_interrupts(mask: InterruptBits) -> Result<(), NoBitsError> {
+pub unsafe fn wait_for_interrupts(mask: InterruptBits) -> Result<(), NoBitsError> {
     if mask.is_empty() {
         let prev = REG_IE.read();
         if prev.is_empty() {

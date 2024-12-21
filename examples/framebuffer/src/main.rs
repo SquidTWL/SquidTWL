@@ -7,10 +7,8 @@ use embedded_graphics::{
     prelude::{Point, Primitive},
     primitives::{PrimitiveStyle, Triangle},
 };
-use squidtwl::{
-    gx2d::{Graphics2D, eg::EmbeddedFramebuffer},
-    interrupt::{InterruptBits, wait_for_interrupts},
-};
+use squidtwl::gx::wait_for_vertical_blank;
+use squidtwl::gx2d::{Graphics2D, eg::EmbeddedFramebuffer};
 
 #[unsafe(no_mangle)]
 extern "C" fn main() {
@@ -23,6 +21,6 @@ extern "C" fn main() {
     tri.draw(&mut lcd).unwrap();
 
     loop {
-        wait_for_interrupts(InterruptBits::LCD_VERTICAL_BLANK).unwrap();
+        wait_for_vertical_blank();
     }
 }
