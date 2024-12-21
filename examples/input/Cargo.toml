@@ -1,0 +1,12 @@
+[package]
+name = "input"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+embedded-graphics = "=0.8.1"
+squidtwl = { path = "../../squidtwl", features = ["embedded_graphics"] }
+tinybmp = "=0.6.0"
+
+[lints]
+workspace = true
