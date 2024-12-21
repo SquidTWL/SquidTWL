@@ -46,7 +46,7 @@ impl<'a> FramebufferMode<'a> {
                 .with_offset(0),
         );
 
-        engine.registers.DISPCNT.mutate(|prev| {
+        engine.registers.REG_DISPCNT.mutate(|prev| {
             prev.with_display_mode(DisplayMode::Framebuffer)
                 .with_framebuffer_vram_block(Disp2VramBank::from_bits(idx as u8))
         });

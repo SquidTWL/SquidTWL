@@ -18,7 +18,7 @@ pub trait Engine2D {}
 
 #[allow(non_snake_case)]
 pub(crate) struct EngineRegisters {
-    pub DISPCNT: voladdress::VolAddress<DisplayControl, Safe, Safe>,
+    pub REG_DISPCNT: voladdress::VolAddress<DisplayControl, Safe, Safe>,
 }
 
 pub struct GraphicsEngine<T: Engine2D> {
@@ -42,7 +42,7 @@ impl EngineRegisters {
         return unsafe {
             let dispcnt = voladdress::VolAddress::new(base);
 
-            EngineRegisters { DISPCNT: dispcnt }
+            EngineRegisters { REG_DISPCNT: dispcnt }
         };
     }
 }
