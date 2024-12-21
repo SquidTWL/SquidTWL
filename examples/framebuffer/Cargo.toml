@@ -1,0 +1,12 @@
+[package]
+name = "framebuffer"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+embedded-graphics = "0.8.1"
+squidtwl = { path = "../../squidtwl", features = ["embedded_graphics"] }
+
+[lints]
+workspace = true

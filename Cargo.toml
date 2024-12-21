@@ -1,0 +1,10 @@
+[workspace]
+members = ["squidtwl", "examples/*"]
+resolver = "2"
+
+[workspace.lints.clippy]
+missing_safety_doc = "allow"
+needless_return = "allow"
+
+[profile.dev]
+opt-level = 1

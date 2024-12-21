@@ -1,0 +1,10 @@
+[build]
+target = "armv5te-none-eabi"
+
+[unstable]
+build-std = ["core", "alloc"]
+
+[target.armv5te-none-eabi]
+rustflags = [
+    "-Clinker=arm-none-eabi-ld",
+]
