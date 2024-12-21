@@ -97,7 +97,7 @@ pub static REG_IF: VolAddress<InterruptBits, Safe, Safe> = unsafe { VolAddress::
  */
 pub fn enable_interrupts(mask: InterruptBits) {
     let mut regval = REG_IE.read();
-    regval &= mask;
+    regval |= mask;
     REG_IE.write(regval);
 }
 
