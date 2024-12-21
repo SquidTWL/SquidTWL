@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 .venv/
 .vscode/
+
+.gdb_history
+rom.nds
