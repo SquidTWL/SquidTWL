@@ -25,8 +25,8 @@ impl Graphics2D {
      * calls. Do not rely on this returning a ``Some`` on subsequent calls.
      */
     pub fn new() -> Option<Graphics2D> {
-        let engine_a = GraphicsEngine::<EngineA>::default();
-        let engine_b = GraphicsEngine::<EngineB>::default();
+        let engine_a = GraphicsEngine::<EngineA>::new();
+        let engine_b = GraphicsEngine::<EngineB>::new();
 
         return Some(Graphics2D {
             engine_a, engine_b

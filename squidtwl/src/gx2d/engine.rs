@@ -52,6 +52,13 @@ impl<T: Engine2D> GraphicsEngine<T> {}
 
 // engine A exclusive functionality
 impl GraphicsEngine<EngineA> {
+    pub(crate) fn new() -> Self {
+        return GraphicsEngine {
+            registers: EngineRegisters::new(0x4000000),
+            _unused: PhantomData,
+        };
+    }
+
     /**
      * Switches this engine to framebuffer mode using VRAM bank A.
      */
@@ -70,19 +77,8 @@ impl GraphicsEngine<EngineA> {
 }
 
 // engine B exclusive functionality
-impl GraphicsEngine<EngineB> {}
-
-impl Default for GraphicsEngine<EngineA> {
-    fn default() -> Self {
-        return GraphicsEngine {
-            registers: EngineRegisters::new(0x4000000),
-            _unused: PhantomData,
-        };
-    }
-}
-
-impl Default for GraphicsEngine<EngineB> {
-    fn default() -> Self {
+impl GraphicsEngine<EngineB> {
+    pub(crate) fn new() -> Self {
         return GraphicsEngine {
             registers: EngineRegisters::new(0x4001000),
             _unused: PhantomData,
