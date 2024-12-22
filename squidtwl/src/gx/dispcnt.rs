@@ -37,7 +37,8 @@ impl DisplayMode {
 }
 
 /** 
- * Enumeration of the possible background modes for an engine.
+ * Enumeration of the possible background modes for an engine. The name refers to the abilities
+ * of background layers 1 through 3. Layer 0 is always either 3D or static.
  * 
  * Note that all modes allow rendering 3D to BG0, not just mode 6.
  */
@@ -45,18 +46,18 @@ impl DisplayMode {
 #[repr(u8)]
 pub enum BackgroundMode {
     /** Three static, untransformed backgrounds */
-    StaticStaticStatic = 0,
+    TilesTilesTiles = 0,
     /** Two static backgrounds, one scaled/rotated background */
-    StaticStaticAffine = 1,
+    TilesTilesAffine = 1,
     /** One static background, two scaled/rotated backgrounds */
-    StaticAffineAffine = 2,
+    TilesAffineAffine = 2,
     /** Two static backgrounds, one scaled/rotated with extra abilities */
-    StaticStaticExtended = 3,
+    TilesTilesExtended = 3,
     /** One static background, one scaled/rotated, one scaled/rotated with extra abilities */
-    StaticAffineExtended = 4,
+    TilesAffineExtended = 4,
     /** One static background, two scaled/rotated with extra abilities */
-    StaticExtendedExtended = 5,
-    /** Engine A only: 3D-only + bitmap background */
+    TilesExtendedExtendeed = 5,
+    /** Engine A only: 3D-only + bitmap background on layer 2 */
     Only3D = 6
 }
 
@@ -67,12 +68,12 @@ impl BackgroundMode {
 
     const fn from_bits(value: u8) -> Self {
         match value {
-            0 => BackgroundMode::StaticStaticStatic,
-            1 => BackgroundMode::StaticStaticAffine,
-            2 => BackgroundMode::StaticAffineAffine,
-            3 => BackgroundMode::StaticStaticExtended,
-            4 => BackgroundMode::StaticAffineExtended,
-            5 => BackgroundMode::StaticExtendedExtended,
+            0 => BackgroundMode::TilesTilesTiles,
+            1 => BackgroundMode::TilesTilesAffine,
+            2 => BackgroundMode::TilesAffineAffine,
+            3 => BackgroundMode::TilesTilesExtended,
+            4 => BackgroundMode::TilesAffineExtended,
+            5 => BackgroundMode::TilesExtendedExtendeed,
             6 => BackgroundMode::Only3D,
             _ => unreachable!()
         }
