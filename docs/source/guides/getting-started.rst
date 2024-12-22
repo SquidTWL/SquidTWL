@@ -11,10 +11,10 @@ Requirements
 
 - A copy of GNU Binutils for the ``arm-none-eabi`` platform.
 
- - For Arch, this can be installed with ``pacman -S arm-none-eabi-binutils``.
- - For Gentoo, this can be acquired with `crossdev <https://wiki.gentoo.org/wiki/Crossdev>`_.
- - On other Linux distributions, the package name will likely be something along the lines of
-   ``binutils-arm-none-eabi``. Do not use the devkitpro binutils.
+  - For Arch, this can be installed with ``pacman -S arm-none-eabi-binutils``.
+  - For Gentoo, this can be acquired with `crossdev <https://wiki.gentoo.org/wiki/Crossdev>`_.
+  - On other Linux distributions, the package name will likely be something along the lines of
+    ``binutils-arm-none-eabi``. Do not use the devkitpro binutils.
 
 - Rust nightly must be installed, because ``build-std`` is *still* unstable.
 - The ``rust-src`` component must be installed for the usage of ``build-std``.
