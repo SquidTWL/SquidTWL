@@ -42,8 +42,8 @@ impl<'a> FramebufferMode<'a> {
         reg.write(
             VramControl::new()
                 .with_enabled(true)
-                .with_mst(0)
-                .with_offset(0),
+                .with_modeset(0)
+                .with_offset(0),  // Offset is ignored in framebuffer mode
         );
 
         engine.registers.REG_DISPCNT.mutate(|prev| {

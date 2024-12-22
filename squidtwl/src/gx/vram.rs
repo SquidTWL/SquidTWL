@@ -10,7 +10,7 @@ pub trait VramBank {
 #[bitfield(u8)]
 pub struct VramControl {
     #[bits(3)]
-    pub mst: u8,
+    pub modeset: u8,
 
     #[bits(2)]
     pub offset: u8,
