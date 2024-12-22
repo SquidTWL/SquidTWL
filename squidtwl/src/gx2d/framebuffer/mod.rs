@@ -1,3 +1,6 @@
+#[cfg(feature = "embedded_graphics")]
+pub mod eg;
+
 use crate::{
     gx::{
         dispcnt::{Disp2VramBank, DisplayMode},
@@ -6,6 +9,9 @@ use crate::{
     },
     raw::va::SaneApplyBehaviour,
 };
+
+#[cfg(feature = "embedded_graphics")]
+pub use eg::EmbeddedFramebuffer;
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum FramebufferBank {

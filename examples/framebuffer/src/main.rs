@@ -9,7 +9,7 @@ use embedded_graphics::{
 };
 use squidtwl::gx::wait_for_vertical_blank;
 use squidtwl::gx2d::framebuffer::FramebufferBank;
-use squidtwl::gx2d::{Graphics2D, eg::EmbeddedFramebuffer};
+use squidtwl::gx2d::{Graphics2D, framebuffer::EmbeddedFramebuffer};
 
 #[unsafe(no_mangle)]
 extern "C" fn main() {

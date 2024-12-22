@@ -1,11 +1,7 @@
 use crate::gx::engine::{EngineA, EngineB, GraphicsEngine};
 
 pub mod framebuffer;
-
 pub mod tilemap;
-
-#[cfg(feature = "embedded_graphics")]
-pub mod eg;
 
 /**
  * Wraps the two 2D engines for the NTR/TWL. This should only be created once; in the future, this

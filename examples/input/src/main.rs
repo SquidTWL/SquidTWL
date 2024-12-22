@@ -15,7 +15,7 @@ use embedded_graphics::{
 };
 use squidtwl::{
     gx::wait_for_vertical_blank,
-    gx2d::{Graphics2D, eg::EmbeddedFramebuffer},
+    gx2d::{Graphics2D, framebuffer::EmbeddedFramebuffer},
     input::read_key_input,
 };
 use tinybmp::Bmp;

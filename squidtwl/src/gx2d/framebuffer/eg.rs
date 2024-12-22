@@ -9,9 +9,7 @@ use embedded_graphics::{
 };
 use voladdress::{Safe, VolBlock};
 
-use crate::gx::vram::VramBank;
-
-use super::framebuffer::FramebufferMode;
+use crate::{gx::vram::VramBank, gx2d::framebuffer::FramebufferMode};
 
 pub struct EmbeddedFramebuffer<'lcd, 'fb> {
     vram: VolBlock<u16, Safe, Safe, 131072>,
