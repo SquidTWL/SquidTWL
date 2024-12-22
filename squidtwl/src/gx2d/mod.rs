@@ -1,8 +1,8 @@
-use engine::{EngineA, EngineB, GraphicsEngine};
+use crate::gx::engine::{EngineA, EngineB, GraphicsEngine};
 
-pub mod engine;
 pub mod framebuffer;
-pub mod reg;
+
+pub mod tilemap;
 
 #[cfg(feature = "embedded_graphics")]
 pub mod eg;
@@ -13,14 +13,14 @@ pub mod eg;
  */
 pub struct Graphics2D {
     pub engine_a: GraphicsEngine<EngineA>,
-    pub engine_b: GraphicsEngine<EngineB>
+    pub engine_b: GraphicsEngine<EngineB>,
 }
 
 impl Graphics2D {
     /**
      * Attempts to create a new ``Graphics2D`` instance. This function should only ever be called
      * once.
-     * 
+     *
      * If this function was called before, this function *should* return ``None`` on all subsequent
      * calls. Do not rely on this returning a ``Some`` on subsequent calls.
      */
@@ -28,8 +28,6 @@ impl Graphics2D {
         let engine_a = GraphicsEngine::<EngineA>::new();
         let engine_b = GraphicsEngine::<EngineB>::new();
 
-        return Some(Graphics2D {
-            engine_a, engine_b
-        });
+        return Some(Graphics2D { engine_a, engine_b });
     }
 }

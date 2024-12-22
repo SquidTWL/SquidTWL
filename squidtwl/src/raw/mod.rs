@@ -1,5 +1,5 @@
-pub mod supervisor;
 pub mod arm;
+pub mod supervisor;
 pub mod va;
 
 // re-exports

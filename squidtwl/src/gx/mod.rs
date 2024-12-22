@@ -1,9 +1,13 @@
 use dispstat::REG_DISPSTAT;
 
-use crate::{interrupt::{wait_for_interrupts, InterruptBits}, raw::va::SaneApplyBehaviour};
+use crate::{
+    interrupt::{InterruptBits, wait_for_interrupts},
+    raw::va::SaneApplyBehaviour,
+};
 
-pub mod dispstat;
 pub mod dispcnt;
+pub mod dispstat;
+pub mod engine;
 pub mod vram;
 
 /**

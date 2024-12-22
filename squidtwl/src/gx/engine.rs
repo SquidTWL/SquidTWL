@@ -8,9 +8,10 @@ use core::marker::PhantomData;
 use sealed::sealed;
 use voladdress::Safe;
 
-use crate::gx::dispcnt::DisplayControl;
-
-use super::framebuffer::{FramebufferBank, FramebufferMode};
+use crate::{
+    gx::dispcnt::DisplayControl,
+    gx2d::framebuffer::{FramebufferBank, FramebufferMode},
+};
 
 /** distinct enums when? */
 #[sealed]
@@ -42,7 +43,9 @@ impl EngineRegisters {
         return unsafe {
             let dispcnt = voladdress::VolAddress::new(base);
 
-            EngineRegisters { REG_DISPCNT: dispcnt }
+            EngineRegisters {
+                REG_DISPCNT: dispcnt,
+            }
         };
     }
 }
@@ -68,7 +71,7 @@ impl GraphicsEngine<EngineA> {
 
     /**
      * Switches this engine to framebuffer mode using the provided VRAM bank.
-     * 
+     *
      * This is useful if bank A/B/C will be used for something else.
      */
     pub fn as_framebuffer_with_bank(&mut self, bank: FramebufferBank) -> FramebufferMode<'_> {

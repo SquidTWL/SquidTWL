@@ -5,19 +5,18 @@ use bitfield_struct::bitfield;
 // "Affine" = controlled by BG rotation and scaling registers
 // "Extended" = Affine, but with more palettes.
 
-
 /** Enumeration of the possible display modes for DISPCNT. */
 #[derive(Debug)]
 #[repr(u8)]
 pub enum DisplayMode {
     /** Turns the display off. */
-    Off = 0, 
+    Off = 0,
     /** Regular graphics, controlled by BG + OBJ. */
     GraphicsDisplay = 1,
     /** Engine A only: Framebuffer (LCDC) mode. */
     Framebuffer = 2,
     /** Display A only: Framebuffer (LCDC) via DMA mode. */
-    DmaFramebuffer = 3
+    DmaFramebuffer = 3,
 }
 
 impl DisplayMode {
@@ -31,15 +30,15 @@ impl DisplayMode {
             0b01 => DisplayMode::GraphicsDisplay,
             0b10 => DisplayMode::Framebuffer,
             0b11 => DisplayMode::DmaFramebuffer,
-            _ => unreachable!()
+            _ => unreachable!(),
         };
     }
 }
 
-/** 
+/**
  * Enumeration of the possible background modes for an engine. The name refers to the abilities
  * of background layers 1 through 3. Layer 0 is always either 3D or static.
- * 
+ *
  * Note that all modes allow rendering 3D to BG0, not just mode 6.
  */
 #[derive(Debug, PartialEq, Eq)]
@@ -58,7 +57,7 @@ pub enum BackgroundMode {
     /** One static background, two scaled/rotated with extra abilities */
     TilesExtendedExtendeed = 5,
     /** Engine A only: 3D-only + bitmap background on layer 2 */
-    Only3D = 6
+    Only3D = 6,
 }
 
 impl BackgroundMode {
@@ -75,7 +74,7 @@ impl BackgroundMode {
             4 => BackgroundMode::TilesAffineExtended,
             5 => BackgroundMode::TilesExtendedExtendeed,
             6 => BackgroundMode::Only3D,
-            _ => unreachable!()
+            _ => unreachable!(),
         }
     }
 }
@@ -101,7 +100,7 @@ impl Disp2VramBank {
             1 => Self::BankB,
             2 => Self::BankC,
             3 => Self::BankD,
-            _ => unreachable!()
+            _ => unreachable!(),
         }
     }
 }
@@ -120,11 +119,11 @@ pub struct DisplayControl {
     pub enable_3d: bool,
 
     #[bits(default = true)]
-    pub tile_obj_mapping: bool,  // ??
+    pub tile_obj_mapping: bool, // ??
     #[bits(default = true)]
-    pub bitmap_obj_2d_dimension: bool,  // ??
+    pub bitmap_obj_2d_dimension: bool, // ??
     #[bits(default = true)]
-    pub bitmap_obj_mapping: bool,  // ??
+    pub bitmap_obj_mapping: bool, // ??
 
     #[bits(9)]
     _pad1: u32,

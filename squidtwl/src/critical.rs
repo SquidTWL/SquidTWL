@@ -1,6 +1,9 @@
 use critical_section::set_impl;
 
-use crate::{interrupt::{ImeFlags, REG_IME}, raw::{CurrentProgramState, ProcessorMode}};
+use crate::{
+    interrupt::{ImeFlags, REG_IME},
+    raw::{CurrentProgramState, ProcessorMode},
+};
 
 struct TwlCriticalSection;
 

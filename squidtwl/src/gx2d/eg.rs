@@ -15,14 +15,16 @@ use super::framebuffer::FramebufferMode;
 
 pub struct EmbeddedFramebuffer<'lcd, 'fb> {
     vram: VolBlock<u16, Safe, Safe, 131072>,
-    _mode: &'lcd mut FramebufferMode<'fb>
-    // mode: PhantomData<FramebufferMode<'fb>>
+    _mode: &'lcd mut FramebufferMode<'fb>, // mode: PhantomData<FramebufferMode<'fb>>
 }
 
 impl EmbeddedFramebuffer<'_, '_> {
     pub fn wrap<'lcd, 'fb>(mode: &'lcd mut FramebufferMode<'fb>) -> EmbeddedFramebuffer<'lcd, 'fb> {
         let block = unsafe { VolBlock::new(mode.vram_bank.bank_base_address()) };
-        return EmbeddedFramebuffer { vram: block, _mode: mode };
+        return EmbeddedFramebuffer {
+            vram: block,
+            _mode: mode,
+        };
     }
 }
 

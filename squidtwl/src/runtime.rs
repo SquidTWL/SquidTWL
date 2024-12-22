@@ -43,9 +43,7 @@ pub fn __aeabi_unwind_cpp_pr2() {}
  */
 pub fn get_text_end() -> *mut u8 {
     let end: *mut u8;
-    unsafe {
-        asm!("ldr {}, =__text_end", out(reg) end)
-    };
+    unsafe { asm!("ldr {}, =__text_end", out(reg) end) };
     return end;
 }
 
@@ -54,8 +52,6 @@ pub fn get_text_end() -> *mut u8 {
  */
 pub fn get_memory_end() -> *mut u8 {
     let end: *mut u8;
-    unsafe {
-        asm!("ldr {}, =__memory_end", out(reg) end)
-    };
+    unsafe { asm!("ldr {}, =__memory_end", out(reg) end) };
     return end;
 }

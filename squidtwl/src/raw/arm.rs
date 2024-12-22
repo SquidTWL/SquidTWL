@@ -31,7 +31,7 @@ impl ProcessorMode {
             0b10111 => ProcessorMode::Abort,
             0b11011 => ProcessorMode::Undefined,
             0b11111 => ProcessorMode::System,
-            _ => panic!("unexpected mode! pass me an actual cpsr value!")
+            _ => panic!("unexpected mode! pass me an actual cpsr value!"),
         }
     }
 }

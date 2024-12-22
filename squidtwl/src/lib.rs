@@ -1,12 +1,11 @@
 #![no_std]
-#![allow(clippy::missing_safety_doc)]  // Our docs are in rST, not Rust Markup Documentation Format.
-
+#![allow(clippy::missing_safety_doc)] // Our docs are in rST, not Rust Markup Documentation Format.
 #![feature(sync_unsafe_cell)]
 #![feature(linkage)]
 
-pub mod raw;
-pub mod interrupt;
 pub mod critical;
+pub mod interrupt;
+pub mod raw;
 pub mod runtime;
 
 pub mod gx;

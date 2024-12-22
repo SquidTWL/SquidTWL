@@ -1,16 +1,21 @@
 /*!
  * An example showing how to do input, using the framebuffer mode.
- * 
+ *
  * This is a bit glitchy due to the low speed of the framebuffer mode.
  */
 
 #![no_std]
 #![no_main]
 
-use embedded_graphics::{image::Image, pixelcolor::Bgr555, prelude::*, primitives::{PrimitiveStyle, StyledDrawable}};
+use embedded_graphics::{
+    image::Image,
+    pixelcolor::Bgr555,
+    prelude::*,
+    primitives::{PrimitiveStyle, StyledDrawable},
+};
 use squidtwl::{
     gx::wait_for_vertical_blank,
-    gx2d::{eg::EmbeddedFramebuffer, Graphics2D},
+    gx2d::{Graphics2D, eg::EmbeddedFramebuffer},
     input::read_key_input,
 };
 use tinybmp::Bmp;
@@ -35,23 +40,22 @@ pub extern "C" fn main() {
         let input = read_key_input();
 
         if dirty && input.into_bits() == 0 {
-            eg.bounding_box().draw_styled(&clear_style, &mut eg).unwrap();
+            eg.bounding_box()
+                .draw_styled(&clear_style, &mut eg)
+                .unwrap();
             dirty = false;
         }
 
         if input.up() {
             image = image.translate(Point::new(0, -10));
             dirty = true;
-        }
-        else if input.down() {
+        } else if input.down() {
             image = image.translate(Point::new(0, 10));
             dirty = true;
-        }
-        else if input.left() {
+        } else if input.left() {
             image = image.translate(Point::new(-10, 0));
             dirty = true;
-        }
-        else if input.right() {
+        } else if input.right() {
             image = image.translate(Point::new(10, 0));
             dirty = true;
         }

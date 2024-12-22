@@ -1,12 +1,11 @@
 use crate::{
     gx::{
         dispcnt::{Disp2VramBank, DisplayMode},
+        engine::{EngineA, GraphicsEngine},
         vram::{VRAM_REGISTERS, VramBank, VramControl},
     },
     raw::va::SaneApplyBehaviour,
 };
-
-use super::engine::{EngineA, GraphicsEngine};
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum FramebufferBank {
@@ -33,7 +32,7 @@ pub struct FramebufferMode<'a> {
 }
 
 impl<'a> FramebufferMode<'a> {
-    pub(crate) fn new<'b : 'a>(
+    pub(crate) fn new<'b: 'a>(
         engine: &'b mut GraphicsEngine<EngineA>,
         vram_bank: FramebufferBank,
     ) -> FramebufferMode<'a> {
@@ -43,7 +42,7 @@ impl<'a> FramebufferMode<'a> {
             VramControl::new()
                 .with_enabled(true)
                 .with_modeset(0)
-                .with_offset(0),  // Offset is ignored in framebuffer mode
+                .with_offset(0), // Offset is ignored in framebuffer mode
         );
 
         engine.registers.REG_DISPCNT.mutate(|prev| {
