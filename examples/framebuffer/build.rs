@@ -1,3 +1,3 @@
 pub fn main() {
-    println!("cargo:rustc-link-arg=-Tnitro.ld")
+    println!("cargo:rustc-link-arg=-Tlinker/nitro.ld")
 }
