@@ -8,3 +8,5 @@ __pycache__/
 
 .gdb_history
 rom.nds
+
+docs/build
