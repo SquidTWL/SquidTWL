@@ -227,4 +227,12 @@ _start:
     // For future-proofing, we do a branch-with-exchange in case ``main`` ends up as a thumb
     // function.
     ldr r0, =main
-    bx r0
+    blx r0
+
+    // Uh oh, somebody returned from main!
+    // Set IME to 0 and halt the CPU to prevent further damage.
+    mov r0, #0x04000000
+    str r0, [r0, #0x208]
+.Lhalt:
+    swi #0x60000
+    b .Lhalt
