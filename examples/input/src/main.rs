@@ -15,7 +15,7 @@ use embedded_graphics::{
 };
 use squidtwl::{
     gx::wait_for_vertical_blank,
-    gx2d::{Graphics2D, framebuffer::EmbeddedFramebuffer},
+    gx2d::framebuffer::{EmbeddedFramebuffer, FramebufferBank, FramebufferMode},
     input::read_key_input,
 };
 use tinybmp::Bmp;
@@ -24,9 +24,8 @@ const BITMAP: &[u8] = include_bytes!("icon.bmp");
 
 #[unsafe(no_mangle)]
 pub extern "C" fn main() {
-    let mut graphics = Graphics2D::new().unwrap();
-    let mut fb = graphics.engine_a.as_framebuffer();
-    let mut eg = EmbeddedFramebuffer::wrap(&mut fb);
+    let fb = FramebufferMode::switch_into(FramebufferBank::BankA);
+    let mut eg = EmbeddedFramebuffer::wrap(&fb);
 
     let bmp: Bmp<'_, Bgr555> = Bmp::from_slice(BITMAP).unwrap();
     let mut image = Image::new(&bmp, Point::zero());

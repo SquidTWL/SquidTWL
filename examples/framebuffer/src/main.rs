@@ -8,16 +8,13 @@ use embedded_graphics::{
     primitives::{PrimitiveStyle, Triangle},
 };
 use squidtwl::gx::wait_for_vertical_blank;
-use squidtwl::gx2d::framebuffer::FramebufferBank;
-use squidtwl::gx2d::{Graphics2D, framebuffer::EmbeddedFramebuffer};
+use squidtwl::gx2d::framebuffer::EmbeddedFramebuffer;
+use squidtwl::gx2d::framebuffer::{FramebufferBank, FramebufferMode};
 
 #[unsafe(no_mangle)]
 extern "C" fn main() {
-    let mut graphics = Graphics2D::new().unwrap();
-    let mut fb = graphics
-        .engine_a
-        .as_framebuffer_with_bank(FramebufferBank::BankB);
-    let mut lcd = EmbeddedFramebuffer::wrap(&mut fb);
+    let fb = FramebufferMode::switch_into(FramebufferBank::BankA);
+    let mut lcd = EmbeddedFramebuffer::wrap(&fb);
 
     let tri = Triangle::new(Point::new(10, 10), Point::new(100, 10), Point::new(10, 100))
         .into_styled(PrimitiveStyle::with_fill(Bgr555::new(15, 0, 15)));

@@ -4,7 +4,7 @@ pub mod eg;
 use crate::{
     gx::{
         dispcnt::{Disp2VramBank, DisplayMode},
-        engine::{EngineA, GraphicsEngine},
+        engine::ENGINE_A,
         vram::{VRAM_REGISTERS, VramBank, VramControl},
     },
     raw::va::SaneApplyBehaviour,
@@ -32,16 +32,16 @@ impl VramBank for FramebufferBank {
     }
 }
 
-pub struct FramebufferMode<'a> {
-    pub engine: &'a mut GraphicsEngine<EngineA>,
+/**
+ * Enables usage of engine A's framebuffer mode, also known as LCDC mode.
+ */
+#[derive(Clone, Copy)]
+pub struct FramebufferMode {
     pub vram_bank: FramebufferBank,
 }
 
-impl<'a> FramebufferMode<'a> {
-    pub(crate) fn new<'b: 'a>(
-        engine: &'b mut GraphicsEngine<EngineA>,
-        vram_bank: FramebufferBank,
-    ) -> FramebufferMode<'a> {
+impl FramebufferMode {
+    pub fn switch_into(vram_bank: FramebufferBank) -> FramebufferMode {
         let idx = vram_bank as usize;
         let reg = VRAM_REGISTERS[idx];
         reg.write(
@@ -51,11 +51,11 @@ impl<'a> FramebufferMode<'a> {
                 .with_offset(0), // Offset is ignored in framebuffer mode
         );
 
-        engine.registers.REG_DISPCNT.mutate(|prev| {
+        ENGINE_A.REG_DISPCNT.mutate(|prev| {
             prev.with_display_mode(DisplayMode::Framebuffer)
                 .with_framebuffer_vram_block(Disp2VramBank::from_bits(idx as u8))
         });
 
-        return FramebufferMode { engine, vram_bank };
+        return FramebufferMode { vram_bank };
     }
 }

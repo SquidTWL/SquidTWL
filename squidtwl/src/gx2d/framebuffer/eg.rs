@@ -11,28 +11,24 @@ use voladdress::{Safe, VolBlock};
 
 use crate::{gx::vram::VramBank, gx2d::framebuffer::FramebufferMode};
 
-pub struct EmbeddedFramebuffer<'lcd, 'fb> {
+pub struct EmbeddedFramebuffer {
     vram: VolBlock<u16, Safe, Safe, 131072>,
-    _mode: &'lcd mut FramebufferMode<'fb>, // mode: PhantomData<FramebufferMode<'fb>>
 }
 
-impl EmbeddedFramebuffer<'_, '_> {
-    pub fn wrap<'lcd, 'fb>(mode: &'lcd mut FramebufferMode<'fb>) -> EmbeddedFramebuffer<'lcd, 'fb> {
+impl EmbeddedFramebuffer {
+    pub fn wrap(mode: &FramebufferMode) -> EmbeddedFramebuffer {
         let block = unsafe { VolBlock::new(mode.vram_bank.bank_base_address()) };
-        return EmbeddedFramebuffer {
-            vram: block,
-            _mode: mode,
-        };
+        return EmbeddedFramebuffer { vram: block };
     }
 }
 
-impl OriginDimensions for EmbeddedFramebuffer<'_, '_> {
+impl OriginDimensions for EmbeddedFramebuffer {
     fn size(&self) -> embedded_graphics::prelude::Size {
         return Size::new(256, 192);
     }
 }
 
-impl DrawTarget for EmbeddedFramebuffer<'_, '_> {
+impl DrawTarget for EmbeddedFramebuffer {
     type Color = Bgr555;
     type Error = core::convert::Infallible;
 

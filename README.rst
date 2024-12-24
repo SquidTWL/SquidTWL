@@ -1,7 +1,7 @@
 SquidTWL
 ========
 
-This is an SDK for the Nintendo DS (NTR/Nitro) and Nintendo DSi (TWL/Twilight). 
+This is a low-level SDK for the Nintendo DS (NTR/Nitro) and Nintendo DSi (TWL/Twilight). 
 
 Minimum Supported Rust Version
 ------------------------------
