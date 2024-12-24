@@ -7,10 +7,9 @@ description = "A mid-level SDK for the NTR/TWL"
 
 [dependencies]
 bitflags = { version = "=2.6.0" }
-thiserror = { version = "=2.0.8", default-features = false }
+thiserror = { version = "=2.0.9", default-features = false }
 voladdress = { version = "=1.4.0" }
 bitfield-struct = { version = "=0.10.0" }
-sealed = { version = "=0.6.0" }
 
 # required for allocators and critical sections
 spin = { version = "=0.9.8", features = ["portable_atomic"] }
@@ -19,6 +18,7 @@ critical-section = { version = "=1.2.0", features = ["restore-state-u32"] }
 
 # feature deps
 embedded-graphics = { version = "=0.8.1", optional = true }
+
 
 [lints]
 workspace = true
