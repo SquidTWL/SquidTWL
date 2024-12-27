@@ -3,8 +3,8 @@ pub mod eg;
 
 use crate::{
     gx::{
-        dispcnt::{Disp2VramBank, DisplayMode},
-        engine::ENGINE_A,
+        dispctl::{Disp2VramBank, DisplayMode},
+        engine::{GraphicsEngine, HasRegisters},
         vram::{VRAM_REGISTERS, VramBank, VramControl},
     },
     raw::va::SaneApplyBehaviour,
@@ -51,9 +51,9 @@ impl FramebufferMode {
                 .with_offset(0), // Offset is ignored in framebuffer mode
         );
 
-        ENGINE_A.REG_DISPCNT.mutate(|prev| {
+        GraphicsEngine::EngineA.regs().REG_DISPCTL.mutate(|prev| {
             prev.with_display_mode(DisplayMode::Framebuffer)
-                .with_framebuffer_vram_block(Disp2VramBank::from_bits(idx as u8))
+                .with_capture_fb_vram_block(Disp2VramBank::from_bits(idx as u8))
         });
 
         return FramebufferMode { vram_bank };

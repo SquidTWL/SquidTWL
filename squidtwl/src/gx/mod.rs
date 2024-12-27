@@ -5,7 +5,7 @@ use crate::{
     raw::va::SaneApplyBehaviour,
 };
 
-pub mod dispcnt;
+pub mod dispctl;
 pub mod dispstat;
 pub mod engine;
 pub mod vram;

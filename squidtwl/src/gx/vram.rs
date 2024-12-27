@@ -18,7 +18,7 @@ pub struct VramControl {
     #[bits(2)]
     _pad: u8,
 
-    #[bits(default = true)]
+    #[bits(default = false)]
     pub enabled: bool,
 }
 

@@ -63,7 +63,7 @@ bitflags! {
     pub struct InterruptBits : u32 {
         const LCD_VERTICAL_BLANK = 1 << 0;
         const LCD_HORIZONTAL_BLANK = 1 << 1;
-        /** See the docs for the DISPCNT register for more information. */
+        /** See the docs for the DISPCTL register for more information. */
         const LCD_VCOUNTER_MATCH = 1 << 2;
 
         const TIMER_OVERFLOW_0 = 1 << 3;

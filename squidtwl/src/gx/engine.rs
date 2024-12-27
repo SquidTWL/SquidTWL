@@ -1,13 +1,22 @@
+use core::fmt::Display;
+
 use voladdress::Safe;
 
-use crate::gx::dispcnt::DisplayControl;
+use crate::gx::dispctl::DisplayControl;
 
 /**
  * Allows easy access to the engine-specific graphics registers.
  */
+#[derive(Debug)]
 #[allow(non_snake_case)]
 pub struct EngineRegisters {
-    pub REG_DISPCNT: voladdress::VolAddress<DisplayControl, Safe, Safe>,
+    pub REG_DISPCTL: voladdress::VolAddress<DisplayControl, Safe, Safe>,
+}
+
+impl Display for EngineRegisters {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        return write!(f, "base: {}", self.REG_DISPCTL.as_ptr() as usize);
+    }
 }
 
 // == Actual code impls below here ==
@@ -15,14 +24,33 @@ pub struct EngineRegisters {
 impl EngineRegisters {
     const fn new(base: usize) -> EngineRegisters {
         return unsafe {
-            let dispcnt = voladdress::VolAddress::new(base);
+            let dispctl = voladdress::VolAddress::new(base);
 
             EngineRegisters {
-                REG_DISPCNT: dispcnt,
+                REG_DISPCTL: dispctl,
             }
         };
     }
 }
 
-pub const ENGINE_A: EngineRegisters = EngineRegisters::new(0x4000000);
-pub const ENGINE_B: EngineRegisters = EngineRegisters::new(0x4001000);
+const ENGINE_A: EngineRegisters = EngineRegisters::new(0x4000000);
+const ENGINE_B: EngineRegisters = EngineRegisters::new(0x4001000);
+
+#[derive(Clone, Copy, PartialEq)]
+pub enum GraphicsEngine {
+    EngineA,
+    EngineB,
+}
+
+pub trait HasRegisters {
+    fn regs(&self) -> &'static EngineRegisters;
+}
+
+impl HasRegisters for GraphicsEngine {
+    fn regs(&self) -> &'static EngineRegisters {
+        return match self {
+            GraphicsEngine::EngineA => &ENGINE_A,
+            GraphicsEngine::EngineB => &ENGINE_B,
+        };
+    }
+}
