@@ -1,2 +1,3 @@
 pub mod framebuffer;
-pub mod tilemap;
+
+pub use framebuffer::{FramebufferBank, FramebufferMode};
