@@ -42,19 +42,19 @@ impl CurrentProgramState {
     }
 
     pub fn n(&self) -> bool {
-        return (self.0 & 1 << 31) != 0;
+        return (self.0 & (1 << 31)) != 0;
     }
     pub fn z(&self) -> bool {
-        return (self.0 & 1 << 30) != 0;
+        return (self.0 & (1 << 30)) != 0;
     }
     pub fn c(&self) -> bool {
-        return (self.0 & 1 << 29) != 0;
+        return (self.0 & (1 << 29)) != 0;
     }
     pub fn v(&self) -> bool {
-        return (self.0 & 1 << 28) != 0;
+        return (self.0 & (1 << 28)) != 0;
     }
     pub fn q(&self) -> bool {
-        return (self.0 & 1 << 27) != 0;
+        return (self.0 & (1 << 27)) != 0;
     }
 
     pub fn interrupts_disabled(&self) -> bool {
